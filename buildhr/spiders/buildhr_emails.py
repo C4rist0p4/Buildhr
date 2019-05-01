@@ -44,7 +44,7 @@ class BuildhrSpiderSpider(scrapy.Spider):
     name = 'buildhr_emails'
  
     def start_requests(self):
-        with open('/Users/christoph/Projekte/buildhr/buildhr/email_run_2.csv', 'r', encoding='utf8') as in_file:
+        with open(r'email_run_2.csv', 'r', encoding='utf8') as in_file:
           csv_reader = csv.DictReader(in_file)
           for url in csv_reader:
             

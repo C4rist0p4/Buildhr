@@ -4,6 +4,7 @@ import pytesseract
 import io
 import base64
 import json
+import csv
 from PIL import Image
 from scrapy_splash import SplashRequest
 
@@ -61,72 +62,11 @@ class BuildhrSpiderSpider(scrapy.Spider):
     name = 'buildhr_spider'
  
     def start_requests(self):
-        urls = [
-
-'http://decoration.buildhr.com/',
-
-'http://www.buildhr.com/area/shanghai/',
-
-'http://www.buildhr.com/area/tianjin/',
-
-'http://www.buildhr.com/area/chongqing/', 
-
-'http://www.buildhr.com/area/jiangsu/',
- 
-'http://www.buildhr.com/area/zhejiang/',
- 
-'http://www.buildhr.com/area/guangdong/', 
- 
-'http://www.buildhr.com/area/hainan/',
- 
-'http://www.buildhr.com/area/fujian/',
- 
-'http://www.buildhr.com/area/shandong/',
- 
-'http://www.buildhr.com/area/jiangxi/',
- 
-'http://www.buildhr.com/area/sichuan/', 
- 
-'http://www.buildhr.com/area/anhui/',
- 
-'http://www.buildhr.com/area/hebei/',
- 
-'http://www.buildhr.com/area/henan/',
- 
-'http://www.buildhr.com/area/hubei/',
- 
-'http://www.buildhr.com/area/hunan/',
- 
-'http://www.buildhr.com/area/shaanxi/',
- 
-'http://www.buildhr.com/area/shanxi/',
-
-'http://www.buildhr.com/area/heilongjiang/', 
-
-'http://www.buildhr.com/area/liaoning/',
-
-'http://www.buildhr.com/area/jilin/',
-
-'http://www.buildhr.com/area/guangxi/',
-
-'http://www.buildhr.com/area/yunnan/',
-
-'http://www.buildhr.com/area/guizhou/', 
- 
-'http://www.buildhr.com/area/gansu/',
- 
-'http://www.buildhr.com/area/neimeng/',
-
-'http://www.buildhr.com/area/ningxia/',
-
-'http://www.buildhr.com/area/xizang/',
-
-'http://www.buildhr.com/area/xinjiang/', 
-
-'http://www.buildhr.com/area/qinghai/' ]
-
-        for url in urls:
-            self.logger.info(url)
+        urls = []
+        with open('/Users/christoph/Projekte/buildhr/buildhr/email_run_2.csv', 'r', encoding='utf8') as in_file:
+          csv_reader = csv.DictReader(in_file)
+          for url in csv_reader:
+            self.logger.info(url['URL'])
             yield scrapy.Request(url=url, callback=self.parse)
 
     def parse(self, response):
