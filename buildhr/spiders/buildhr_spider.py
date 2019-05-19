@@ -58,7 +58,7 @@ end
 
 class BuildhrSpiderSpider(scrapy.Spider):
     name = 'buildhr_spider'
-    pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract'
+    #pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract'
 
     def start_requests(self):
         with open(r'C:\Users\Admin\Projekte\Buildhr-master\buildhr\spiders\URLS.csv', 'r', encoding='utf8') as in_file:
